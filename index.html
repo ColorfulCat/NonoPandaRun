@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>猫不屎</title>
+	<link rel="icon" type="image/GIF" href="icon.ico"/>
+	<meta name="viewport" content="width=321, user-scalable=no"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="full-screen" content="yes"/>
+	<meta name="screen-orientation" content="portrait"/>
+	<meta name="x5-fullscreen" content="true"/>
+	<style>
+		canvas {
+			image-rendering: optimizeSpeed;
+			image-rendering: -moz-crisp-edges;
+			image-rendering: -webkit-optimize-contrast;
+			image-rendering: -o-crisp-edges;
+			image-rendering: optimize-contrast;
+			-ms-interpolation-mode: nearest-neighbor;
+		}
+	</style>
+
+</head>
+<body>	 
+	<canvas id="gameCanvas" width="640" height="960"></canvas>
+	<script type="text/javascript" src="cocos2d-html5.js"></script>
+	<script type="text/javascript"  src="catnorris.js"></script>
+	<script type="text/javascript" src="WeixinApi.js"></script>
+	<script>
+
+        window.wxData = {//朋友圈
+            "appId": "", // 服务号可以填写appId
+            "imgUrl":'http://1.catrunning.sinaapp.com/icon.png',
+            "link":'http://1.catrunning.sinaapp.com',
+            "desc": "别踩那坨便便！",
+            "title":"《猫不屎》~ by_大花猫"
+        };
+        window.wxFriend = {//发送好友
+            "appId": "", // 服务号可以填写appId
+            "imgUrl":'http://1.catrunning.sinaapp.com/icon.png',
+            "link":'http://1.catrunning.sinaapp.com',
+            "desc":"别踩那坨便便！",
+            "title":"《猫不屎》~ by_大花猫"
+        };
+
+        function share(m, step, percent){
+        	if(m == 0){
+        		document.title =window.wxData.desc = "别踩那坨便便！";
+                document.title =window.wxFriend.desc = "别踩那坨便便！";
+        	}
+        	if(m == 1){
+        		document.title = window.wxData.desc = "刷屏！我躲过了"+step+"波便便的进攻，打败"+percent+"%朋友圈的人！你能超过我吗？";
+                document.title = window.wxFriend.desc = "刷屏！我躲过了"+step+"波便便的进攻，打败"+percent+"%朋友圈的人！你能超过我吗？";
+        	}
+        	if(m == 2){
+        		document.title = window.wxData.desc = "我又被便便大王欺负了！谁帮我去打败它？！";
+                document.title = window.wxFriend.desc = "我又被便便大王欺负了！谁帮我去打败它？！";
+        	}
+        };
+
+        WeixinApi.ready(function(Api) {
+        	var wxCallbacks = {
+        		ready : function() {
+        		},
+        		cancel : function(resp) {
+        		},
+        		fail : function(resp) {
+        		},
+        		confirm : function(resp) {
+        		},
+        		all : function(resp) {
+        		}
+        	};
+        	Api.shareToFriend(wxFriend, wxCallbacks);
+        	Api.shareToTimeline(wxData, wxCallbacks);
+        	Api.shareToWeibo(wxData, wxCallbacks);
+        });
+    </script>
+
+    <script type="text/javascript">
+    	var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    	document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F5cfe71134b5db52f36051739e0f2d655' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+
+</body>
+</html>
